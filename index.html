@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f2ed" />
+  <title>Thread — Fashion Recommendation Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="announcement">YOUR STYLE, REIMAGINED <span>✦</span> Curated for you, not the crowd.</div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Thread home"><span class="brand-mark">t.</span><span>thread<span class="brand-dot">.</span></span></a>
+    <nav class="desktop-nav">
+      <a href="#discover">Discover</a><a href="#recommendations">For you</a><a href="#wardrobe">Style profile</a>
+    </nav>
+    <div class="top-actions"><button id="savedNav" class="icon-btn" aria-label="Show saved items">♡ <span id="savedCount">0</span></button><button class="avatar" id="profileShortcut" title="Edit style profile">JD</button><button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="sparkle">✳</span> THE PERSONAL STYLE EDIT</div>
+        <h1>Wear what<br>feels <em>like you.</em></h1>
+        <p>Discover pieces that match your mood, your plans, and your own kind of confidence. Your next favorite outfit starts here.</p>
+        <div class="hero-buttons"><a class="btn btn-dark" href="#discover">Explore the edit <span>↗</span></a><button class="btn btn-light" id="openQuiz">Find my style <span>✦</span></button></div>
+        <div class="hero-note"><div class="mini-avatars"><span>✦</span><span>✿</span><span>◒</span></div><span><strong id="heroItemCount">40</strong> handpicked pieces to explore</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-image-wrap"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1100&q=85" alt="Friends exploring fashion together" onerror="this.src='https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=70'"></div>
+        <div class="floating-card"><span class="float-icon">✳</span><div><strong>Made for your mood</strong><small>Personalized style, every day</small></div><span class="float-arrow">↗</span></div>
+        <div class="vertical-label">STYLE IS PERSONAL — ALWAYS</div>
+        <div class="hero-sticker">THE<br><em>new</em><br>EDIT</div>
+      </div>
+    </section>
+    <section class="trust-row"><div><span>✳</span> Curated recommendations</div><div><span>◈</span> Build your personal style</div><div><span>♡</span> Save what you love</div><div><span>↗</span> Outfit inspiration</div></section>
+
+    <section id="discover" class="section discover-section">
+      <div class="section-heading"><div><div class="eyebrow">A LITTLE STYLE, A LOT OF YOU</div><h2>Find your next <em>favorite.</em></h2></div><p>Browse the edit, then refine it until it feels just right.</p></div>
+      <div class="toolbar">
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search pieces, colors, occasions..." aria-label="Search fashion items"><kbd>⌘ K</kbd></div>
+        <button class="filter-toggle" id="filterToggle">☷ Filters <span id="filterBadge" class="filter-badge hidden">0</span></button>
+        <select id="sortSelect" aria-label="Sort products"><option value="recommended">Sort: Recommended</option><option value="price-low">Price: Low to high</option><option value="price-high">Price: High to low</option><option value="rating">Top rated</option></select>
+      </div>
+      <div class="filter-panel hidden" id="filterPanel">
+        <div class="filter-group"><label>Category</label><div class="chip-row" id="categoryFilters"><button class="filter-chip active" data-category="All">All</button><button class="filter-chip" data-category="Tops">Tops</button><button class="filter-chip" data-category="Bottoms">Bottoms</button><button class="filter-chip" data-category="Dresses">Dresses</button><button class="filter-chip" data-category="Outerwear">Outerwear</button><button class="filter-chip" data-category="Shoes">Shoes</button><button class="filter-chip" data-category="Accessories">Accessories</button></div></div>
+        <div class="filter-group"><label>Budget</label><div class="chip-row" id="budgetFilters"><button class="filter-chip active" data-budget="all">Any price</button><button class="filter-chip" data-budget="under50">Under ₹4,000</button><button class="filter-chip" data-budget="50to100">₹4,000–₹8,000</button><button class="filter-chip" data-budget="over100">Over ₹8,000</button></div></div>
+        <div class="filter-group"><label>Style vibe</label><div class="chip-row" id="vibeFilters"><button class="filter-chip" data-vibe="Minimal">Minimal</button><button class="filter-chip" data-vibe="Streetwear">Streetwear</button><button class="filter-chip" data-vibe="Classic">Classic</button><button class="filter-chip" data-vibe="Romantic">Romantic</button><button class="filter-chip" data-vibe="Sporty">Sporty</button></div></div>
+        <button id="clearFilters" class="clear-btn">Clear all filters ↺</button>
+      </div>
+      <div class="results-line"><span id="resultsCount">Showing 40 pieces</span><span class="results-right">THE THREAD EDIT <span>✦</span></span></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div id="emptyState" class="empty-state hidden"><div>⌕</div><h3>No pieces found</h3><p>Try a different search or clear some filters.</p><button class="btn btn-dark" id="emptyReset">Reset filters</button></div>
+      <div class="load-more-wrap"><button id="loadMore" class="btn btn-outline">Show more inspiration <span>↓</span></button></div>
+    </section>
+
+    <section class="style-quiz" id="wardrobe">
+      <div class="quiz-art"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=85" alt="Neutral fashion outfit inspiration"></div>
+      <div class="quiz-content"><div class="eyebrow">YOUR STYLE, YOUR RULES</div><h2>Good style starts<br>with <em>knowing you.</em></h2><p>Tell us a little about your taste. We'll tune the edit to the colors, occasions, and silhouettes you love.</p><div class="quiz-pills"><span>✦ Personal style profile</span><span>✦ Smarter suggestions</span><span>✦ Zero fashion rules</span></div><button class="btn btn-dark" id="openQuiz2">Build my style profile <span>↗</span></button></div>
+    </section>
+    <section id="recommendations" class="section rec-section"><div class="section-heading"><div><div class="eyebrow">A SMALL NUDGE IN THE RIGHT DIRECTION</div><h2>Styled around <em>you.</em></h2></div><p id="recSubtitle">A few ideas to get your outfit rotation going.</p></div><div class="recommendation-strip" id="recommendationStrip"></div></section>
+    <section class="newsletter"><div class="newsletter-mark">t.</div><div><div class="eyebrow">NOTES FROM THE STYLE DESK</div><h2>A little inspiration<br>in your inbox.</h2><p>Fresh edits, outfit ideas, and thoughtful finds. No noise.</p></div><form id="newsletterForm"><label for="emailInput">Your email address</label><div class="email-row"><input type="email" id="emailInput" required placeholder="you@example.com"><button type="submit" aria-label="Subscribe">↗</button></div><small id="newsletterMessage">By subscribing, you agree to receive style updates.</small></form></section>
+  </main>
+  <footer><a class="brand" href="#"><span class="brand-mark">t.</span><span>thread<span class="brand-dot">.</span></span></a><span>Style is personal. Keep it that way.</span><span>© 2026 THREAD STUDIO</span></footer>
+
+  <div class="drawer-backdrop hidden" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-label="Saved items drawer" aria-hidden="true"><div class="drawer-head"><div><div class="eyebrow">YOUR LITTLE COLLECTION</div><h3>Saved pieces <span id="drawerSavedCount">(0)</span></h3></div><button class="close-btn" id="closeDrawer" aria-label="Close saved items">×</button></div><div id="savedItems" class="saved-items"></div><div class="drawer-bottom"><button id="clearSaved" class="clear-btn">Clear saved items</button><button class="btn btn-dark" id="shareSaved">Copy my shortlist ↗</button></div></aside>
+
+  <div class="modal-backdrop hidden" id="quizBackdrop">
+    <section class="quiz-modal" role="dialog" aria-modal="true" aria-labelledby="quizTitle"><button class="close-btn modal-close" id="closeQuiz" aria-label="Close style quiz">×</button><div class="quiz-progress"><span id="progressBar"></span></div><div class="eyebrow">YOUR PERSONAL STYLE EDIT · <span id="stepLabel">01 / 03</span></div><div id="quizStep"></div><div class="quiz-modal-footer"><button id="quizBack" class="btn btn-light hidden">← Back</button><button id="quizNext" class="btn btn-dark">Next step ↗</button></div></section>
+  </div>
+  <div class="modal-backdrop product-modal-backdrop hidden" id="productModal" aria-hidden="true"><section class="product-modal" role="dialog" aria-modal="true" aria-label="Product details"><button class="close-btn product-modal-close" id="closeProductModal" aria-label="Close product details">×</button><div id="productModalContent" class="product-modal-layout"></div></section></div>
+  <button class="ai-launcher" id="aiLauncher" aria-label="Open AI stylist"><span class="ai-launcher-spark">✦</span><span><strong>AI Stylist</strong><small>Let's style your day</small></span><span class="ai-launcher-arrow">↗</span></button>
+  <aside class="ai-panel" id="aiPanel" aria-label="AI personal stylist" aria-hidden="true">
+    <div class="ai-panel-head"><div class="ai-avatar">✦</div><div class="ai-head-copy"><strong>Your AI Stylist</strong><small><span class="ai-status-dot"></span> Personal style, made easier</small></div><button class="ai-close" id="aiClose" aria-label="Close AI stylist">×</button></div>
+    <div class="ai-context"><span>✧</span> Outfit ideas based on your vibe, budget & saved pieces.</div>
+    <div class="ai-messages" id="aiMessages" aria-live="polite"><div class="ai-message ai-assistant">Hi! I'm your Thread stylist. Tell me where you're going, what you like, or what you're stuck on — I'll help you put a look together. ✨<small>Styling tip: include the occasion and your budget for more useful ideas.</small></div></div>
+    <div class="ai-suggestions" id="aiSuggestions"><button type="button" data-ai-prompt="Build me a casual everyday outfit under ₹6,000">Everyday outfit</button><button type="button" data-ai-prompt="Help me style a smart-casual look">Smart casual</button><button type="button" data-ai-prompt="Recommend pieces based on my style profile">For my style</button></div>
+    <form class="ai-compose" id="aiForm"><textarea id="aiInput" rows="1" maxlength="1200" placeholder="Ask your stylist anything…" aria-label="Message your AI stylist" required></textarea><button type="submit" id="aiSend" aria-label="Send message">↑</button></form>
+    <div class="ai-disclaimer" id="aiStatus">AI mode connects when you run the included local server with an API key. Smart local styling is available too.</div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
